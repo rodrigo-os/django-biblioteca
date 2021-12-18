@@ -1,0 +1,106 @@
+[
+  {
+    "model": "catalogo.Genero",
+    "pk": 1,
+    "fields": {
+      "nome": "Ficção Científica"
+    }
+  },
+  {
+    "model": "catalogo.Genero",
+    "pk": 2,
+    "fields": {
+      "nome": "Didático"
+    }
+  },
+  {
+    "model": "catalogo.Genero",
+    "pk": 3,
+    "fields": {
+      "nome": "Suspense"
+    }
+  },
+  {
+    "model": "catalogo.Genero",
+    "pk": 4,
+    "fields": {
+      "nome": "Terror"
+    }
+  },
+  {
+    "model": "catalogo.Linguagem",
+    "pk": 1,
+    "fields": {
+      "nome": "Português"
+    }
+  },
+  {
+    "model": "catalogo.Linguagem",
+    "pk": 2,
+    "fields": {
+      "nome": "Inglês"
+    }
+  },
+  {
+    "model": "catalogo.Autor",
+    "pk": 1,
+    "fields": {
+      "primeiro_nome": "João",
+      "ultimo_nome": "Silva",
+      "data_nascimento": "2000-12-31"
+    }
+  },
+  {
+    "model": "catalogo.Autor",
+    "pk": 2,
+    "fields": {
+      "primeiro_nome": "Maria",
+      "ultimo_nome": "Souza",
+      "data_nascimento": "1980-10-20",
+      "data_falecimento": "2021-01-25"
+    }
+  },
+  {
+    "model": "catalogo.Livro",
+    "pk": 1,
+    "fields": {
+      "titulo": "Programação com Django",
+      "autor": 1,
+      "resumo": "Desenvolvimento aplicações web com Django.",
+      "isbn": "1234567891011",
+      "genero": [2],
+      "linguagem": 1
+    }
+  },
+  {
+    "model": "catalogo.Livro",
+    "pk": 2,
+    "fields": {
+      "titulo": "Livro de Terror",
+      "autor": 2,
+      "resumo": "Este é um livro que dá muito medo.",
+      "isbn": "1110987654321",
+      "genero": [3,4],
+      "linguagem": 2
+    }
+  },
+  {
+    "model": "catalogo.ExemplarLivro",
+    "pk": "4de60d63-a10d-474c-91f4-bc3e37a6b9d7",
+    "fields": {
+      "livro": 1,
+      "editora": "Editora Brasil",
+      "data_devolucao": "2022-01-01",
+      "situacao": "e"
+    }
+  },
+  {
+    "model": "catalogo.ExemplarLivro",
+    "pk": "a69a713b-1830-42b4-830e-dbe183a3540f",
+    "fields": {
+      "livro": 2,
+      "editora": "Editora Inglesa",
+      "situacao": "d"
+    }
+  }
+]
