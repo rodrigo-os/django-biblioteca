@@ -25,6 +25,9 @@
                             <li>
                                 User: {{ user.get_username }}
                             </li>
+                            <li><a href="{% url 'meus-emprestimos' %}">
+                                Meus Empréstimos
+                            </a></li>
                             <li><a href="{% url 'logout'%}?next={{request.path}}">
                                 Logout
                             </a></li>

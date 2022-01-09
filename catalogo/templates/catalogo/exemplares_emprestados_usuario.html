@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Livros Emprestados</h1>
+    {% if exemplarlivro_list %}
+        <ul>
+            {% for exemplarlivro in exemplarlivro_list %}
+                <li class="{% if exemplarlivro.esta_atrasado %}text-danger{% endif %}">
+                    <a href="{% url 'livro-detalhes' exemplarlivro.livro.pk %}">
+                        {{exemplarlivro.livro.titulo}}
+                    </a> ({{ exemplarlivro.data_devolucao }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Não há livros emprestados para você.</p>
+    {% endif %}
+{% endblock %}

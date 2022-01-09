@@ -34,3 +34,11 @@ class BookListView(generic.ListView):
 
 class BookDetailView(generic.DetailView):
     model = Livro
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
+    model = ExemplarLivro
+    template_name = 'catalogo/exemplares_emprestados_usuario.html'
+
+    def get_queryset(self):
+        return ExemplarLivro.objects.filter(usuario=self.request.user).filter(situacao__exact='e').order_by('data_devolucao')

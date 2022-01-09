@@ -49,7 +49,8 @@ class Livro(models.Model):
 
 
 import uuid
-
+from django.contrib.auth.models import User
+from datetime import date
 
 class ExemplarLivro(models.Model):
 
@@ -57,6 +58,7 @@ class ExemplarLivro(models.Model):
     livro = models.ForeignKey(Livro, on_delete=models.SET_NULL, null=True)
     editora = models.CharField(max_length=200)
     data_devolucao = models.DateField(null=True, blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     SITUACAO_EXEMPLAR = (
         ('m', 'Manutenção'),
@@ -72,6 +74,12 @@ class ExemplarLivro(models.Model):
         default='m',
         help_text='Situação do exemplar',
     )
+
+    @property
+    def esta_atrasado(self):
+        if self.data_devolucao and date.today() > self.data_devolucao:
+            return True
+        return False
 
     class Meta:
         ordering = ['data_devolucao']
