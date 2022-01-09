@@ -20,4 +20,12 @@
         </ul>
     </div>
 
+    <p>Você já visitou esta página {{ num_visitas }}
+        {% if num_visitas == 1 %}
+            vez
+        {% else %}
+            vezes
+        {% endif %}.
+    </p>
+
 {% endblock %}
