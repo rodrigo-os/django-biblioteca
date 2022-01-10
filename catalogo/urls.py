@@ -10,3 +10,7 @@ urlpatterns = [
 urlpatterns += [
     path('meusemprestimos/', views.LoanedBooksByUserListView.as_view(), name='meus-emprestimos'),
 ]
+
+urlpatterns += [
+    path('livro/<uuid:pk>/renovar/', views.renew_book, name='renovar-livro'),
+]

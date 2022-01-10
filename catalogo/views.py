@@ -42,3 +42,34 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
 
     def get_queryset(self):
         return ExemplarLivro.objects.filter(usuario=self.request.user).filter(situacao__exact='e').order_by('data_devolucao')
+
+
+import datetime
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.decorators import permission_required
+
+from catalogo.forms import RenovarLivroForm
+
+@permission_required('catalogo.pode_renovar_emprestimo')
+def renew_book(request, pk):
+    book_instance = get_object_or_404(ExemplarLivro, pk=pk)
+
+    if request.method == 'POST':
+        form = RenovarLivroForm(request.POST)
+        if form.is_valid():
+            book_instance.data_devolucao = form.cleaned_data['data_renovacao']
+            book_instance.save()
+            return HttpResponseRedirect(reverse('meus-emprestimos'))
+
+    else:
+        proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
+        form = RenovarLivroForm(initial={'data_renovacao': proposed_renewal_date})
+
+    context = {
+        'form': form,
+        'book_instance': book_instance,
+    }
+
+    return render(request, 'catalogo/renovar_livro.html', context)

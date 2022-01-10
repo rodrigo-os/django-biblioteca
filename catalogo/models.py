@@ -83,6 +83,7 @@ class ExemplarLivro(models.Model):
 
     class Meta:
         ordering = ['data_devolucao']
+        permissions = (("pode_renovar_emprestimo", "Pode renovar empréstimo."),)
 
     def __str__(self):
         return f'{self.id} ({self.livro.titulo})'
