@@ -14,3 +14,11 @@ urlpatterns += [
 urlpatterns += [
     path('livro/<uuid:pk>/renovar/', views.renew_book, name='renovar-livro'),
 ]
+
+urlpatterns += [
+    path('autores/', views.AutorListView.as_view(), name='autores'),
+    path('autores/<int:pk>', views.AutorDetailView.as_view(), name='autor-detalhes'),
+    path('autor/create/', views.AutorCreate.as_view(), name='autor-create'),
+    path('autor/<int:pk>/update/', views.AutorUpdate.as_view(), name='autor-update'),
+    path('autor/<int:pk>/delete/', views.AutorDelete.as_view(), name='autor-delete'),
+]

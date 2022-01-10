@@ -20,7 +20,7 @@
                     <ul class="sidebar-nav">
                         <li><a href="{% url 'index' %}">Página inicial</a></li>
                         <li><a href="{% url 'livros' %}">Todos os livros</a></li>
-                        <li><a href="">All authors</a></li>
+                        <li><a href="{% url 'autores' %}">Todos os autores</a></li>
                         {% if user.is_authenticated %}
                             <li>
                                 User: {{ user.get_username }}

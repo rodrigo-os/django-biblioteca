@@ -27,6 +27,10 @@ class Autor(models.Model):
 
     class Meta:
         ordering = ['ultimo_nome', 'primeiro_nome']
+        permissions = (("pode_manipular_autor", "Manipula o cadastro de autores."),)
+
+    def get_absolute_url(self):
+        return reverse('autor-detalhes', args=[str(self.id)])
 
     def __str__(self):
         return f'{self.ultimo_nome}, {self.primeiro_nome}'

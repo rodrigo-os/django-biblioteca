@@ -73,3 +73,34 @@ def renew_book(request, pk):
     }
 
     return render(request, 'catalogo/renovar_livro.html', context)
+
+
+class AutorListView(generic.ListView):
+    model = Autor
+
+
+class AutorDetailView(generic.DetailView):
+    model = Autor
+
+
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
+class AutorCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalogo.pode_manipular_autor'
+    model = Autor
+    fields = '__all__'
+    initial = {'data_falecimento': '05/01/2018'}
+
+class AutorUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'catalogo.pode_manipular_autor'
+    model = Autor
+    fields = ['primeiro_nome', 'ultimo_nome', 'data_nascimento', 'data_falecimento']
+
+
+class AutorDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'catalogo.pode_manipular_autor'
+    model = Autor
+    success_url = reverse_lazy('autores')
